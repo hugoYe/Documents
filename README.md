@@ -131,13 +131,3 @@ var context = canvas.getContext("2d");
 
 ```
 
-
-**效果显示如下：**
-
-```javascript
-
-var canvas = document.getElementById("canvas");
-
-var context = canvas.getContext("2d");
-
-```
