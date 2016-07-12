@@ -15,5 +15,5 @@ RxJava 在 GitHub 主页上的自我介绍是 "a library for composing asynchron
 
 异步操作很关键的一点是程序的简洁性，因为在调度过程比较复杂的情况下，异步代码经常会既难写也难被读懂。 Android 创造的 ```AsyncTask``` 和```Handler``` ，其实都是为了让异步代码更加简洁。RxJava的优势也是简洁，但它的简洁的与众不同之处在于，**随着程序逻辑变得越来越复杂，它依然能够保持简洁**。
 
-　　　　　　　　　　　　　![举个例子](http://ww4.sinaimg.cn/large/52eb2279jw1f2rx409pcnj2044048mx5.jpg "title text")
+　　　　　　　　　　　　　                   ![举个例子](http://ww4.sinaimg.cn/large/52eb2279jw1f2rx409pcnj2044048mx5.jpg "title text")
 
