@@ -1,4 +1,3 @@
-[TOC]
 # Documents
 平时学习整理的文档资料
 
@@ -120,6 +119,17 @@
 使用```表示代码块。
 
 ##### 1.4.2 示例
+**语法规则如下：**
+```
+```javascript
+
+var canvas = document.getElementById("canvas");
+
+var context = canvas.getContext("2d");
+
+```
+```
+**效果显示如下：**
 ```javascript
 
 var canvas = document.getElementById("canvas");
