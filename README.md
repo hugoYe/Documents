@@ -136,3 +136,18 @@ var canvas = document.getElementById("canvas");
 var context = canvas.getContext("2d");
 ```
 
+##### 1.4.3 注意
+1. `这个符号是在 Esc 键下面，切换到英文下即可。
+2. ```后面的 javascript 表示此段代码为javascript代码，Markdown会自行使用javascript代码颜色渲染。这里也可以不写。PS：谁能够提供一个完整的Markdown可以渲染的语言列表啊，比如：linux命令这里写什么？
+3. 本文档所有使用讲解Markdown语法标记示例的地方都是使用代码块标记的。
+
+#### 1.5 行内代码
+##### 1.5.1 说明
+使用` `表示行内代码。
+##### 1.5.2 示例
+**语法规则如下：**
+```
+这是`javascript`代码
+```
+**显示效果如下：**
+这是`javascript`代码
