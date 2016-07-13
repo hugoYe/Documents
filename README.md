@@ -159,7 +159,7 @@ var context = canvas.getContext("2d");
 
 #### 1.6 导入图片
 ##### 1.6.1 说明
-使用 `![Alt text](/path/to/img.jpg "Optional title")` 导入图片。其中：
+使用 ![Alt text](/path/to/img.jpg "Optional title") 导入图片。其中：
 * `Alt text` 为如果图片无法显示时显示的文字；
 * `/path/to/img.jpg` 为图片所在路径；
 * `Optional title` 为显示标题。显示效果为在你将鼠标放到图片上后，会显示一个小框提示，提示的内容就是 `Optional title` 里的内容。
@@ -170,5 +170,27 @@ var context = canvas.getContext("2d");
 ![Markdown](http://images.cnitblog.com/blog/404392/201501/122257231047591.jpg)
 ```
 **显示效果如下：**
+
 ![Markdown](http://images.cnitblog.com/blog/404392/201501/122257231047591.jpg)
 
+##### 1.6.3 注意
+1. 导入的图片路径可以使用绝对路径也可以使用相对路径，建议使用相对路径。
+2. 我通常的做法是Markdown文档的同级目录下建立一个pictures文件夹，里面放置所有所需的图片，如果图片多的话，你也可以在pictures文件夹里建立子文件夹归类。
+
+#### 1.7 列表
+##### 1.7.1 说明
+使用 `1. 2. 3.` 表示有序列表，使用 `*` 或 `-` 或 `+` 表示无序列表。
+
+##### 1.7.2 示例
+**例1：有序列表**
+**语法规则如下：**
+```
+1. 第一点
+2. 第二点
+3. 第三点
+```
+**显示效果如下：**
+
+1. 第一点
+2. 第二点
+3. 第三点
