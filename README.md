@@ -159,7 +159,7 @@ var context = canvas.getContext("2d");
 
 #### 1.6 导入图片
 ##### 1.6.1 说明
-使用 ![Alt text](/path/to/img.jpg "Optional title") 导入图片。其中：
+使用 `![Alt text](/path/to/img.jpg "Optional title")` 导入图片。其中：
 * `Alt text` 为如果图片无法显示时显示的文字；
 * `/path/to/img.jpg` 为图片所在路径；
 * `Optional title` 为显示标题。显示效果为在你将鼠标放到图片上后，会显示一个小框提示，提示的内容就是 `Optional title` 里的内容。
@@ -194,3 +194,24 @@ var context = canvas.getContext("2d");
 1. 第一点
 2. 第二点
 3. 第三点
+
+**例2：无序列表**
+**语法规则如下：**
+```
++ 呵呵
+  * 嘉嘉
+  - 嘻嘻
+  - 吼吼
+    - 嘎嘎
+    + 桀桀
+* 哈哈
+```
+**显示效果如下：**
+
++ 呵呵
+  * 嘉嘉
+  - 嘻嘻
+  - 吼吼
+    - 嘎嘎
+    + 桀桀
+* 哈哈
