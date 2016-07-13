@@ -3,8 +3,8 @@
 ### 目录索引
 * [RxJava 到底是什么](#1)
 
-### RxJava 到底是什么
-<h3 </h3>
+
+<h3 id="1">RxJava 到底是什么</h3>
 一个词：__异步__。
 
 RxJava 在 GitHub 主页上的自我介绍是 "a library for composing asynchronous and event-based programs using observable sequences for the Java VM"（一个在 Java VM 上使用可观测的序列来组成异步的、基于事件的程序的库）。这就是 RxJava ，概括得非常精准。
