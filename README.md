@@ -121,12 +121,12 @@
 ##### 1.4.2 示例
 **语法规则如下：**
 ```
-\```javascript
+\`\`\`javascript
 
 var canvas = document.getElementById("canvas");
 
 var context = canvas.getContext("2d");
 
-\```
+\`\`\`
 ```
 
