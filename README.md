@@ -159,7 +159,7 @@ var context = canvas.getContext("2d");
 
 #### 1.6 导入图片
 ##### 1.6.1 说明
-使用 ![Alt text](/path/to/img.jpg "Optional title") 导入图片。其中：
+使用 `![Alt text](/path/to/img.jpg "Optional title")` 导入图片。其中：
 * `Alt text` 为如果图片无法显示时显示的文字；
 * `/path/to/img.jpg` 为图片所在路径；
 * `Optional title` 为显示标题。显示效果为在你将鼠标放到图片上后，会显示一个小框提示，提示的内容就是 `Optional title` 里的内容。
@@ -170,6 +170,5 @@ var context = canvas.getContext("2d");
 ![Markdown](http://images.cnitblog.com/blog/404392/201501/122257231047591.jpg)
 ```
 **显示效果如下：**
-
 ![Markdown](http://images.cnitblog.com/blog/404392/201501/122257231047591.jpg)
 
