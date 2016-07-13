@@ -120,6 +120,9 @@
 
 ##### 1.4.2 示例
 **语法规则如下：**
+  ```javascript
+  var canvas = document.getElementById("canvase");
+  ```
 ```
 \`\`\`javascript
 
