@@ -150,4 +150,26 @@ var context = canvas.getContext("2d");
 这是`javascript`代码
 ```
 **显示效果如下：**
+
 这是`javascript`代码
+
+##### 1.5.3 注意
+1. 本页部分文字中间的英文字母就是使用行内代码标记标记的。
+2. 这个的使用场景我也有些模糊。我常在文字间有英文的时候使用，但有时又不知道该不该使用，困扰。 **如果你知道，请告诉我。**
+
+#### 1.6 导入图片
+##### 1.6.1 说明
+使用 ![Alt text](/path/to/img.jpg "Optional title") 导入图片。其中：
+* `Alt text` 为如果图片无法显示时显示的文字；
+* `/path/to/img.jpg` 为图片所在路径；
+* `Optional title` 为显示标题。显示效果为在你将鼠标放到图片上后，会显示一个小框提示，提示的内容就是 `Optional title` 里的内容。
+
+##### 1.6.2 示例
+**语法规则如下：**
+```
+![Markdown](http://images.cnitblog.com/blog/404392/201501/122257231047591.jpg)
+```
+**显示效果如下：**
+
+![Markdown](http://images.cnitblog.com/blog/404392/201501/122257231047591.jpg)
+
