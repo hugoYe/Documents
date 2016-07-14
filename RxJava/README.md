@@ -82,7 +82,7 @@ new Thread() {
 
 而如果使用 RxJava ，实现方式是这样的：
 
-```
+```java
 Observable.from(folders)
     .flatMap(new Func1<File, Observable<File>>() {
         @Override
