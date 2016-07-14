@@ -111,6 +111,21 @@ Observable.from(folders)
         }
     });
 ```
+那位说话了：『你这代码明明变多了啊！简洁个毛啊！』大兄弟你消消气，我说的是逻辑的简洁，不是单纯的代码量少（逻辑简洁才是提升读写代码速度的必杀技对不？）。观察一下你会发现， RxJava 的这个实现，是一条从上到下的**链式调用**，没有任何嵌套，这在逻辑的简洁性上是具有优势的。当需求变得复杂时，这种优势将更加明显（试想如果还要求只选取前 10 张图片，常规方式要怎么办？如果有更多这样那样的要求呢？再试想，在这一大堆需求实现完两个月之后需要改功能，当你翻回这里看到自己当初写下的那一片`迷之缩进`，你能保证自己将迅速看懂，而不是对着代码重新捋一遍思路？）。
+
+另外，如果你的 IDE 是 Android Studio ，其实每次打开某个 Java 文件的时候，你会看到被自动 **Lambda** 化的预览，这将让你更加清晰地看到程序逻辑：
+```
+Observable.from(folders)
+    .flatMap((Func1) (folder) -> { Observable.from(file.listFiles()) })
+    .filter((Func1) (file) -> { file.getName().endsWith(".png") })
+    .map((Func1) (file) -> { getBitmapFromFile(file) })
+    .subscribeOn(Schedulers.io())
+    .observeOn(AndroidSchedulers.mainThread())
+    .subscribe((Action1) (bitmap) -> { imageCollectorView.addImage(bitmap) });
+```
+
+> 如果你习惯使用 Retrolambda ，你也可以直接把代码写成上面这种简洁的形式。而如果你看到这里还不知道什么是 Retrolambda ，我不建议你现在就去学习它。原因有两点：1. Lambda 是把双刃剑，它让你的代码简洁的同时，降低了代码的可读性，因此同时学习 RxJava 和 Retrolambda 可能会让你忽略 RxJava 的一些技术细节；2. Retrolambda 是 Java 6/7 对 Lambda 表达式的非官方兼容方案，它的向后兼容性和稳定性是无法保障的，因此对于企业项目，使用 Retrolambda 是有风险的。所以，与很多 RxJava 的推广者不同，我并不推荐在学习 RxJava 的同时一起学习 Retrolambda。事实上，我个人虽然很欣赏 Retrolambda，但我从来不用它。
+
 
 
 
