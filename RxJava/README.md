@@ -80,6 +80,42 @@ new Thread() {
 }.start();
 ```
 
+而如果使用 RxJava ，实现方式是这样的：
+
+```
+Observable.from(folders)
+    .flatMap(new Func1<File, Observable<File>>() {
+        @Override
+        public Observable<File> call(File file) {
+            return Observable.from(file.listFiles());
+        }
+    })
+    .filter(new Func1<File, Boolean>() {
+        @Override
+        public Boolean call(File file) {
+            return file.getName().endsWith(".png");
+        }
+    })
+    .map(new Func1<File, Bitmap>() {
+        @Override
+        public Bitmap call(File file) {
+            return getBitmapFromFile(file);
+        }
+    })
+    .subscribeOn(Schedulers.io())
+    .observeOn(AndroidSchedulers.mainThread())
+    .subscribe(new Action1<Bitmap>() {
+        @Override
+        public void call(Bitmap bitmap) {
+            imageCollectorView.addImage(bitmap);
+        }
+    });
+```
+
+
+
+
+
 <h3 id="3">API 介绍和原理简析</h3>
 
 <h4 id="3.1">1. 概念：扩展的观察者模式</h4>
