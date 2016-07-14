@@ -148,7 +148,7 @@ RxJava 的异步实现，是通过一种扩展的观察者模式来实现的。
 
 OnClickListener 的模式大致如下图：
 
-![图 1](../pictures/pic1.jap)
+![图 1](/../pictures/pic1.jpg)
 
 
 
