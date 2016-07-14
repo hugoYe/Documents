@@ -140,7 +140,7 @@ Observable.from(folders)
 
 RxJava 的异步实现，是通过一种扩展的观察者模式来实现的。
 
-观察者模式
+<h5 id="3.1.1">观察者模式</h5>
 
 先简述一下观察者模式，已经熟悉的可以跳过这一段。
 
@@ -156,7 +156,7 @@ RxJava 的异步实现，是通过一种扩展的观察者模式来实现的。
 
 而 RxJava 作为一个工具库，使用的就是通用形式的**观察者模式**。
 
-RxJava 的观察者模式
+<h5 id="3.1.2">RxJava 的观察者模式</h5>
 
 RxJava 有四个基本概念：`Observable` (可观察者，即被观察者)、 `Observer` (观察者)、 `subscribe` (订阅)、事件。`Observable` 和 `Observer` 通过 `subscribe()` 方法实现订阅关系，从而 `Observable` 可以在需要的时候发出事件来通知 `Observer`。
 
@@ -169,12 +169,6 @@ RxJava 有四个基本概念：`Observable` (可观察者，即被观察者)、 
 RxJava 的观察者模式大致如下图：
 
 ![图 3](pictures/pic3.jpg)
-
-
-
-<h5 id="3.1.1">观察者模式</h5>
-
-<h5 id="3.1.2">RxJava 的观察者模式</h5>
 
 
 <h4 id="3.2">2. 基本实现</h4>
