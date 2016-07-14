@@ -57,7 +57,7 @@ RxJava 在 GitHub 主页上的自我介绍是 "a library for composing asynchron
 　　　　　　　　　　　　　                   ![举个例子](http://ww4.sinaimg.cn/large/52eb2279jw1f2rx409pcnj2044048mx5.jpg "title text")
 
 假设有这样一个需求：界面上有一个自定义的视图 ```imageCollectorView```，它的作用是显示多张图片，并能使用 ```addImage(Bitmap)``` 方法来任意增加显示的图片。现在需要程序将一个给出的目录数组 ```File[] folders``` 中每个目录下的 png 图片都加载出来并显示在 ```imageCollectorView```中。需要注意的是，由于读取图片的这一过程较为耗时，需要放在后台执行，而图片的显示则必须在 UI 线程执行。常用的实现方式有多种，我这里贴出其中一种：
-```
+```android
 new Thread() {
     @Override
     public void run() {
@@ -114,7 +114,7 @@ Observable.from(folders)
 那位说话了：『你这代码明明变多了啊！简洁个毛啊！』大兄弟你消消气，我说的是逻辑的简洁，不是单纯的代码量少（逻辑简洁才是提升读写代码速度的必杀技对不？）。观察一下你会发现， RxJava 的这个实现，是一条从上到下的**链式调用**，没有任何嵌套，这在逻辑的简洁性上是具有优势的。当需求变得复杂时，这种优势将更加明显（试想如果还要求只选取前 10 张图片，常规方式要怎么办？如果有更多这样那样的要求呢？再试想，在这一大堆需求实现完两个月之后需要改功能，当你翻回这里看到自己当初写下的那一片`迷之缩进`，你能保证自己将迅速看懂，而不是对着代码重新捋一遍思路？）。
 
 另外，如果你的 IDE 是 Android Studio ，其实每次打开某个 Java 文件的时候，你会看到被自动 **Lambda** 化的预览，这将让你更加清晰地看到程序逻辑：
-```
+```java
 Observable.from(folders)
     .flatMap((Func1) (folder) -> { Observable.from(file.listFiles()) })
     .filter((Func1) (file) -> { file.getName().endsWith(".png") })
