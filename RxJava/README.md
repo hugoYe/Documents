@@ -173,9 +173,81 @@ RxJava 的观察者模式大致如下图：
 
 <h4 id="3.2">2. 基本实现</h4>
 
+基于以上的概念， RxJava 的基本实现主要有三点：
+
 <h5 id="3.2.1">1) 创建 Observer</h5>
 
+Observer 即观察者，它决定事件触发的时候将有怎样的行为。 RxJava 中的 `Observer` 接口的实现方式：
+
+```
+Observer<String> observer = new Observer<String>() {
+    @Override
+    public void onNext(String s) {
+        Log.d(tag, "Item: " + s);
+    }
+
+    @Override
+    public void onCompleted() {
+        Log.d(tag, "Completed!");
+    }
+
+    @Override
+    public void onError(Throwable e) {
+        Log.d(tag, "Error!");
+    }
+};
+```
+
+除了 `Observer` 接口之外，RxJava 还内置了一个实现了 `Observer` 的抽象类：`Subscriber`。 `Subscriber` 对 `Observer` 接口进行了一些扩展，但他们的基本使用方式是完全一样的：
+
+```
+Subscriber<String> subscriber = new Subscriber<String>() {
+    @Override
+    public void onNext(String s) {
+        Log.d(tag, "Item: " + s);
+    }
+
+    @Override
+    public void onCompleted() {
+        Log.d(tag, "Completed!");
+    }
+
+    @Override
+    public void onError(Throwable e) {
+        Log.d(tag, "Error!");
+    }
+};
+```
+
+不仅基本使用方式一样，实质上，在 RxJava 的 subscribe 过程中，Observer 也总是会先被转换成一个 Subscriber 再使用。所以如果你只想使用基本功能，选择 Observer 和 Subscriber 是完全一样的。它们的区别对于使用者来说主要有两点：
+
+1. onStart(): 这是 Subscriber 增加的方法。它会在 subscribe 刚开始，而事件还未发送之前被调用，可以用于做一些准备工作，例如数据的清零或重置。这是一个可选方法，默认情况下它的实现为空。需要注意的是，如果对准备工作的线程有要求（例如弹出一个显示进度的对话框，这必须在主线程执行）， onStart() 就不适用了，因为它总是在 subscribe 所发生的线程被调用，而不能指定线程。要在指定的线程来做准备工作，可以使用 doOnSubscribe() 方法，具体可以在后面的文中看到。
+2. unsubscribe(): 这是 Subscriber 所实现的另一个接口 Subscription 的方法，用于取消订阅。在这个方法被调用后，Subscriber 将不再接收事件。一般在这个方法调用前，可以使用 isUnsubscribed() 先判断一下状态。 unsubscribe() 这个方法很重要，因为在 subscribe() 之后， Observable 会持有 Subscriber 的引用，这个引用如果不能及时被释放，将有**内存泄露**的风险。所以最好保持一个原则：要在不再使用的时候尽快在合适的地方（例如 onPause() onStop() 等方法中）调用 unsubscribe() 来解除引用关系，以避免内存泄露的发生。
+
+
 <h5 id="3.2.2">2) 创建 Observable</h5>
+
+Observable 即被观察者，它决定什么时候触发事件以及触发怎样的事件。 RxJava 使用 create() 方法来创建一个 Observable ，并为它定义事件触发规则：
+
+```
+Observable observable = Observable.create(new Observable.OnSubscribe<String>() {
+    @Override
+    public void call(Subscriber<? super String> subscriber) {
+        subscriber.onNext("Hello");
+        subscriber.onNext("Hi");
+        subscriber.onNext("Aloha");
+        subscriber.onCompleted();
+    }
+});
+```
+
+可以看到，这里传入了一个 OnSubscribe 对象作为参数。OnSubscribe 会被存储在返回的 Observable 对象中，它的作用相当于一个计划表，当 Observable 被订阅的时候，OnSubscribe 的 call() 方法会自动被调用，事件序列就会依照设定依次触发（对于上面的代码，就是观察者Subscriber 将会被调用三次 onNext() 和一次 onCompleted()）。这样，由被观察者调用了观察者的回调方法，就实现了由被观察者向观察者的事件传递，即观察者模式。
+
+> 这个例子很简单：事件的内容是字符串，而不是一些复杂的对象；事件的内容是已经定好了的，而不像有的观察者模式一样是待确定的（例如网络请求的结果在请求返回之前是未知的）；所有事件在一瞬间被全部发送出去，而不是夹杂一些确定或不确定的时间间隔或者经过某种触发器来触发的。总之，这个例子看起来毫无实用价值。但这是为了便于说明，实质上只要你想，各种各样的事件发送规则你都可以自己来写。至于具体怎么做，后面都会讲到，但现在不行。只有把基础原理先说明白了，上层的运用才能更容易说清楚。
+
+
+
+
 
 <h5 id="3.2.3">3) Subscribe (订阅)</h5>
 
