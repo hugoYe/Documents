@@ -245,11 +245,108 @@ Observable observable = Observable.create(new Observable.OnSubscribe<String>() {
 
 > 这个例子很简单：事件的内容是字符串，而不是一些复杂的对象；事件的内容是已经定好了的，而不像有的观察者模式一样是待确定的（例如网络请求的结果在请求返回之前是未知的）；所有事件在一瞬间被全部发送出去，而不是夹杂一些确定或不确定的时间间隔或者经过某种触发器来触发的。总之，这个例子看起来毫无实用价值。但这是为了便于说明，实质上只要你想，各种各样的事件发送规则你都可以自己来写。至于具体怎么做，后面都会讲到，但现在不行。只有把基础原理先说明白了，上层的运用才能更容易说清楚。
 
+`create()` 方法是 RxJava 最基本的创造事件序列的方法。基于这个方法， RxJava 还提供了一些方法用来快捷创建事件队列，例如：
 
+* `just(T...)`: 将传入的参数依次发送出来。
 
+```
+Observable observable = Observable.just("Hello", "Hi", "Aloha");
+// 将会依次调用：
+// onNext("Hello");
+// onNext("Hi");
+// onNext("Aloha");
+// onCompleted();
+```
+
+* `from(T[])` / `from(Iterable<? extends T>)` : 将传入的数组或 Iterable 拆分成具体对象后，依次发送出来。
+
+```
+String[] words = {"Hello", "Hi", "Aloha"};
+Observable observable = Observable.from(words);
+// 将会依次调用：
+// onNext("Hello");
+// onNext("Hi");
+// onNext("Aloha");
+// onCompleted();
+```
+
+上面 `just(T...)` 的例子和 `from(T[])` 的例子，都和之前的 create(OnSubscribe) 的例子是等价的。
 
 
 <h5 id="3.2.3">3) Subscribe (订阅)</h5>
+
+创建了 `Observable` 和 `Observer` 之后，再用 `subscribe()` 方法将它们联结起来，整条链子就可以工作了。代码形式很简单：
+
+```
+observable.subscribe(observer);
+// 或者：
+observable.subscribe(subscriber);
+```
+
+> 有人可能会注意到， `subscribe()` 这个方法有点怪：它看起来是『`observalbe` 订阅了 `observer` / `subscriber`』而不是『`observer` / `subscriber` 订阅了 `observalbe`』，这看起来就像『杂志订阅了读者』一样颠倒了对象关系。这让人读起来有点别扭，不过如果把 API 设计成 `observer.subscribe(observable)` / `subscriber.subscribe(observable)` ，虽然更加符合思维逻辑，但对流式 API 的设计就造成影响了，比较起来明显是得不偿失的。
+
+`Observable.subscribe(Subscriber)` 的内部实现是这样的（仅核心代码）：
+
+```
+// 注意：这不是 subscribe() 的源码，而是将源码中与性能、兼容性、扩展性有关的代码剔除后的核心代码。
+// 如果需要看源码，可以去 RxJava 的 GitHub 仓库下载。
+public Subscription subscribe(Subscriber subscriber) {
+    subscriber.onStart();
+    onSubscribe.call(subscriber);
+    return subscriber;
+}
+```
+
+可以看到，`subscriber()` 做了3件事：
+1. 调用 `Subscriber.onStart()` 。这个方法在前面已经介绍过，是一个可选的准备方法。
+2. 调用 `Observable` 中的 `OnSubscribe.call(Subscriber)` 。在这里，事件发送的逻辑开始运行。从这也可以看出，在 RxJava 中， `Observable` 并不是在创建的时候就立即开始发送事件，而是在它被订阅的时候，即当 `subscribe()` 方法执行的时候。
+3. 将传入的 `Subscriber` 作为 `Subscription` 返回。这是为了方便 `unsubscribe()`.
+
+整个过程中对象间的关系如下图：
+
+![图 4](pictures/pic4.jpg)
+
+或者可以看动图：
+
+![图 5](pictures/pic5.gif)
+
+除了 `subscribe(Observer)` 和 `subscribe(Subscriber)` ，`subscribe()` 还支持不完整定义的回调，RxJava 会自动根据定义创建出 `Subscriber` 。形式如下：
+
+```
+Action1<String> onNextAction = new Action1<String>() {
+    // onNext()
+    @Override
+    public void call(String s) {
+        Log.d(tag, s);
+    }
+};
+Action1<Throwable> onErrorAction = new Action1<Throwable>() {
+    // onError()
+    @Override
+    public void call(Throwable throwable) {
+        // Error handling
+    }
+};
+Action0 onCompletedAction = new Action0() {
+    // onCompleted()
+    @Override
+    public void call() {
+        Log.d(tag, "completed");
+    }
+};
+
+// 自动创建 Subscriber ，并使用 onNextAction 来定义 onNext()
+observable.subscribe(onNextAction);
+// 自动创建 Subscriber ，并使用 onNextAction 和 onErrorAction 来定义 onNext() 和 onError()
+observable.subscribe(onNextAction, onErrorAction);
+// 自动创建 Subscriber ，并使用 onNextAction、 onErrorAction 和 onCompletedAction 来定义 onNext()、 onError() 和 onCompleted()
+observable.subscribe(onNextAction, onErrorAction, onCompletedAction);
+```
+
+简单解释一下这段代码中出现的 `Action1` 和 `Action0`。 `Action0` 是 RxJava 的一个接口，它只有一个方法 `call()` ，这个方法是无参无返回值的；由于 `onCompleted()` 方法也是无参无返回值的，因此 `Action0` 可以被当成一个包装对象，将 `onCompleted()` 的内容打包起来将自己作为一个参数传入 `subscribe()` 以实现不完整定义的回调。这样其实也可以看做将 `onCompleted()` 方法作为参数传进了 `subscribe()`，相当于其他某些语言中的『闭包』。 `Action1` 也是一个接口，它同样只有一个方法 `call(T param)`，这个方法也无返回值，但有一个参数；与 `Action0` 同理，由于 `onNext(T obj)` 和 `onError(Throwable error)` 也是单参数无返回值的，因此 `Action1` 可以将 `onNext(obj)` 和 `onError(error)` 打包起来传入 `subscribe()` 以实现不完整定义的回调。事实上，虽然 `Action0` 和 `Action1` 在 API 中使用最广泛，但 RxJava 是提供了多个 `ActionX` 形式的接口 (例如 `Action2`, `Action3`) 的，它们可以被用以包装不同的无返回值的方法。
+
+> 注：正如前面所提到的，`Observer` 和 `Subscriber` 具有相同的角色，而且 `Observer` 在 `subscribe()` 过程中最终会被转换成 `Subscriber` 对象，因此，从这里开始，后面的描述我将用 `Subscriber` 来代替 `Observer` ，这样更加严谨。
+
 
 <h5 id="3.2.4">4) 场景示例</h5>
 
