@@ -350,8 +350,70 @@ observable.subscribe(onNextAction, onErrorAction, onCompletedAction);
 
 <h5 id="3.2.4">4) 场景示例</h5>
 
+下面举两个例子：
+
+> 为了把原理用更清晰的方式表述出来，本文中挑选的都是功能尽可能简单的例子，以至于有些示例代码看起来会有『画蛇添足』『明明不用 RxJava 可以更简便地解决问题』的感觉。当你看到这种情况，不要觉得是因为 RxJava 太啰嗦，而是因为在过早的时候举出真实场景的例子并不利于原理的解析，因此我刻意挑选了简单的情景。
+
+a. 打印字符串数组
+
+将字符串数组 `names` 中的所有字符串依次打印出来：
+
+```
+String[] names = ...;
+Observable.from(names)
+    .subscribe(new Action1<String>() {
+        @Override
+        public void call(String name) {
+            Log.d(tag, name);
+        }
+    });
+```
+
+b. 由 id 取得图片并显示
+
+由指定的一个 `drawable` 文件 `id drawableRes` 取得图片，并显示在 `ImageView` 中，并在出现异常的时候打印 `Toast` 报错：
+
+```
+int drawableRes = ...;
+ImageView imageView = ...;
+Observable.create(new OnSubscribe<Drawable>() {
+    @Override
+    public void call(Subscriber<? super Drawable> subscriber) {
+        Drawable drawable = getTheme().getDrawable(drawableRes));
+        subscriber.onNext(drawable);
+        subscriber.onCompleted();
+    }
+}).subscribe(new Observer<Drawable>() {
+    @Override
+    public void onNext(Drawable drawable) {
+        imageView.setImageDrawable(drawable);
+    }
+
+    @Override
+    public void onCompleted() {
+    }
+
+    @Override
+    public void onError(Throwable e) {
+        Toast.makeText(activity, "Error!", Toast.LENGTH_SHORT).show();
+    }
+});
+```
+
+正如上面两个例子这样，创建出 `Observable` 和 `Subscriber` ，再用 `subscribe()` 将它们串起来，一次 RxJava 的基本使用就完成了。非常简单。
+
+然而，
+
+![图 6](pictures/pic6.jpg)
+
+在 RxJava 的默认规则中，事件的发出和消费都是在同一个线程的。也就是说，如果只用上面的方法，实现出来的只是一个同步的观察者模式。观察者模式本身的目的就是『后台处理，前台回调』的异步机制，因此异步对于 RxJava 是至关重要的。而要实现异步，则需要用到 RxJava 的另一个概念： `Scheduler` 。
+
 
 <h4 id="3.3">3. 线程控制 —— Scheduler (一)</h4>
+
+
+
+
 
 <h5 id="3.3.1">1) Scheduler 的 API (一)</h5>
 
