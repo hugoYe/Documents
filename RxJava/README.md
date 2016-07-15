@@ -1076,9 +1076,38 @@ getToken()
 
 <h4 id="4.2">2. RxBinding</h4>
 
+[RxBinding](https://github.com/JakeWharton/RxBinding) 是 Jake Wharton 的一个开源库，它提供了一套在 Android 平台上的基于 RxJava 的 Binding API。所谓 Binding，就是类似设置 `OnClickListener` 、设置 `TextWatcher` 这样的注册绑定对象的 API。
+
+举个设置点击监听的例子。使用 `RxBinding` ，可以把事件监听用这样的方法来设置：
+
+```
+Button button = ...;
+RxView.clickEvents(button) // 以 Observable 形式来反馈点击事件
+    .subscribe(new Action1<ViewClickEvent>() {
+        @Override
+        public void call(ViewClickEvent event) {
+            // Click handling
+        }
+    });
+```
+
+看起来除了形式变了没什么区别，实质上也是这样。甚至如果你看一下它的源码，你会发现它连实现都没什么惊喜：它的内部是直接用一个包裹着的 `setOnClickListener()` 来实现的。然而，仅仅这一个形式的改变，却恰好就是 RxBinding 的目的：扩展性。通过 RxBinding 把点击监听转换成 `Observable` 之后，就有了对它进行扩展的可能。扩展的方式有很多，根据需求而定。一个例子是前面提到过的 `throttleFirst()` ，用于去抖动，也就是消除手抖导致的快速连环点击：
+
+```
+RxView.clickEvents(button)
+    .throttleFirst(500, TimeUnit.MILLISECONDS)
+    .subscribe(clickAction);
+```
+
+如果想对 `RxBinding` 有更多了解，可以去它的 [GitHub](https://github.com/JakeWharton/RxBinding) 项目 下面看看。
+
 <h4 id="4.3">3. 各种异步操作</h4>
 
+前面举的 Retrofit 和 RxBinding 的例子，是两个可以提供现成的 `Observable` 的库。而如果你有某些异步操作无法用这些库来自动生成 `Observable`，也完全可以自己写。例如数据库的读写、大图片的载入、文件压缩/解压等各种需要放在后台工作的耗时操作，都可以用 RxJava 来实现，有了之前几章的例子，这里应该不用再举例了。
+
 <h4 id="4.4">4. RxBus</h4>
+
+RxBus 名字看起来像一个库，但它并不是一个库，而是一种模式，它的思想是使用 RxJava 来实现了 `EventBus` ，而让你不再需要使用 `Otto` 或者 GreenRobot 的 `EventBus`。至于什么是 RxBus，可以看[这篇文章](http://nerds.weddingpartyapp.com/tech/2014/12/24/implementing-an-event-bus-with-rxjava-rxbus/)。顺便说一句，Flipboard 已经用 RxBus 替换掉了 `Otto` ，目前为止没有不良反应。
 
 <h3 id="5">最后</h3>
 
