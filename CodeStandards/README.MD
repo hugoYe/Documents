@@ -29,6 +29,31 @@
  
 <h4 id="1.1"> 1.1 常量 </h4> 
 
+常量必须用static final修饰，保证其值在运行时不可被改写。所有字母大写，单词之间用下划线“_"分隔。例如
+
+```
+// Good
+static final int STATE_DOWNLOADING = 0;
+static final int STATE_IDLE = 1;
+static final int STATE_BLOCKING = 2;
+ 
+// Bad
+static final int stateDownloading = 0;
+```
+
+方法块内的常量必须用final修饰，并且字母大写，例如
+
+```
+public void sortUserList(List<User> userList) {
+    // Good
+    final int N = userList.size();
+ 
+    // Bad
+    final int n = userList.size();
+
+}
+```
+
 <h4 id="1.2"> 1.2 变量 </h4> 
 
 <h4 id="1.3"> 1.3 方法 </h4> 
