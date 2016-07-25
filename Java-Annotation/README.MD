@@ -57,8 +57,8 @@ Java目前只内置了3种**标准注解**（`@Override`, `@Deprecated`, `@Suppr
 
 |    注解名称    |     作用     |
 |-----------------|-------------|
-|    @Target    |	表示该注解可以用于什么地方。可能的ElementType参数包括：
-					CONSTRUCTOR: 构造器的声明 
+|    @Target    |	表示该注解可以用于什么地方。可能的ElementType参数包括：|
+|		|			CONSTRUCTOR: 构造器的声		| 
 					FIELD: 域声明（包括enum实例）
 					METHOD: 方法声明
 					PACKAGE: 包声明
