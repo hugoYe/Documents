@@ -56,6 +56,7 @@ public class PasswordUtils {
 Java目前只内置了3种**标准注解**（`@Override`, `@Deprecated`, `@SuppressWarnings`），以及4种**元注解**。**元注解**专职负责注解其他的注解：
 
 |    注解名称    |     作用     |
+|-----------------|-------------|
 |    @Target    |	表示该注解可以用于什么地方。可能的ElementType参数包括：
 					CONSTRUCTOR: 构造器的声明 
 					FIELD: 域声明（包括enum实例）
