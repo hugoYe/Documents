@@ -28,6 +28,15 @@ public @interface UseCase {
 
 注解中的元素`id`和`description`定义类似方法的定义。
 
+1. 通过 @interface 定义，注解名即为自定义注解名。
+2. 注解配置参数名为注解类的方法名，且：
+   * 所有方法没有方法体，没有参数没有修饰符，实际只允许 public & abstract 修饰符，默认为 public，不允许抛异常。
+   * 方法返回值只能是基本类型，String, Class, annotation, enumeration 或者是他们的一维数组。
+   * 若只有一个默认属性，可直接用 value() 函数。一个属性都没有表示该 Annotation 为 Mark Annotation
+
+3. 可以加 default 表示默认值。
+
+
 使用**实例**：
 
 ```
@@ -50,6 +59,7 @@ public class PasswordUtils {
 }
 
 ```
+
 
 ## 2. 元注解
 
