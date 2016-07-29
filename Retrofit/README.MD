@@ -11,7 +11,8 @@
 <h2 id="0"> 概述 </h2>
 
 > [官网](http://square.github.io/retrofit/)
-[github](https://github.com/square/retrofit)
+
+> [github](https://github.com/square/retrofit)
 
 <h2 id="1"> 使用 </h2>
 
