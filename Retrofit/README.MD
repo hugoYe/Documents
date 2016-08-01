@@ -127,7 +127,14 @@ public interface FileUploadService {
 }
 ```
 如果你需要上传文件，和我们前面的做法类似，定义一个接口方法，需要注意的是，这个方法不再有 @FormUrlEncoded这个注解，而换成了@Multipart，后面只需要在参数中增加Part就可以了。也许你会问，这里的Part和Field究竟有什么区别，其实从功能上讲，无非就是客户端向服务端发起请求携带参数的方式不同，并且前者可以携带的参数类型更加丰富，包括数据流。也正是因为这一点，我们可以通过这种方式来上传文件，下面我们就给出这个接口的使用方法：
+```
+// 先创建service
+FileUploadService service = retrofit.create(FileUploadService.class);
 
+// 构建要上传的文件
+File file = new File(filename);
+RequestBody requestFile = RequestBody.create(MediaType.parse("application/otcet-stream", file));
+```
 
 
 
