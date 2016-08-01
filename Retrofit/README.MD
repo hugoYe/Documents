@@ -10,10 +10,10 @@
 
 <h2 id="0"> 概述 </h2>
 
-> [项目官网](http://square.github.io/retrofit/)
->                    [项目源码：github](https://github.com/square/retrofit)
+> [项目官网 http://square.github.io/retrofit/](http://square.github.io/retrofit/)
+>                    [项目源码：github https://github.com/square/retrofit](https://github.com/square/retrofit)
 
-**Retrofit**是一个 [RESTful](http://baike.baidu.com/link?url=diNiB-Mag1_w58m9Ygv1Q_exrnWeIwysrGakOZpcB1gnhiNfqhX-5zUgM6r4lsU2eilk7J7Qcg7EJdXp7K2M8K "RESTful百度百科") 的 HTTP 网络请求框架的**封装**。注意这里并没有说它是`网络请求框架`，主要原因在于网络请求的工作并不是Retrofit来完成的。Retrofit2.0 开始内置`OkHttp`，前者专注于接口的封装，后者专注于网络请求的高效，二者分工协作。
+**Retrofit**是一个 [RESTful](http://baike.baidu.com/link?url=diNiB-Mag1_w58m9Ygv1Q_exrnWeIwysrGakOZpcB1gnhiNfqhX-5zUgM6r4lsU2eilk7J7Qcg7EJdXp7K2M8K "RESTful百度百科") 的 HTTP 网络请求框架的**封装**。注意这里并没有说它是`网络请求框架`，主要原因在于网络请求的工作并不是Retrofit来完成的。Retrofit2.0 开始内置[OkHttp http://square.github.io/okhttp/](http://square.github.io/okhttp/)(`OkHttp` 是基于http协议封装的一套请求客户端，虽然它也可以开线程，但根本上它更偏向真正的请求，跟HttpClient, HttpUrlConnection的职责是一样的)，前者专注于接口的封装，后者专注于网络请求的高效，二者分工协作。
 
 ![Retrofit架构图](pictures/pic1.jpg)
 
