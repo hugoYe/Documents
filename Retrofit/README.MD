@@ -71,6 +71,20 @@ repos.enqueue(new Callback<List<Repo>>(){
 ```
 啥感觉？有没有突然觉得请求接口就好像访问自家的方法一样简单？呐，前面我们看到的，就是 Retrofit官方的 demo 了。你以为这就够了？噗~怎么可能。
 
+#### 2.1 Url配置
+
+Retrofit支持的协议包括**GET/POST/PUT/DELETE/HEAD/PATCH**，当然你也可以直接用HTTP来自定义请求。这些协议均以[注解]("http://baike.baidu.com/link?url=sA6pIs6zkD6FWOSnN_AlYauX0OXcCRhN0Nk22G3BrmckOralM9jSOKKKgboKv1gUFA339BnCkh6ikBGZPXkWYa" "注解百度百科")的形式进行配置，比如我们已经见过GET的用法：
+```
+@GET("users/{user}/repos")
+Call<List<Repo>> listRepos(@Path("user") String user);
+```
+这些注解都有一个参数 value，用来配置其路径，比如示例中的 **users/{user}/repos**，我们还注意到在构造Retrofit之时我们还传入了一个**baseUrl("https://api.github.com/")**，请求的完整 Url 就是通过**baseUrl**与**注解的value（下面称 “path“ ）** 整合起来的，具体整合的规则如下：
+* path是绝对路径的形式：  
+  path = "/apath"，baseUrl = "http://host:port/a/b"     
+  Url = "http://host:port/apath"
+* sdf 
+
+
 
 
 <h2 id="2"> 源码解析 </h2>
