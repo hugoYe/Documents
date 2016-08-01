@@ -95,6 +95,40 @@ Call<List<Repo>> listRepos(@Path("user") String user);
 建议采用第二种方式来配置，并尽量使用同一种路径形式。如果你在代码里面混合采用了多种配置形式，恰好赶上你哪天头晕眼花，信不信分分钟写一堆 bug 啊哈哈。
 
 
+#### 2.2 参数类型
+发请求时，需要传入参数，Retrofit通过注解的形式令 Http 请求的参数变得更加直接，而且类型安全。
+
+##### 2.2.1 Query & QueryMap
+```
+@GET("/list")
+Call<ResponseBody> list(@Query("page") int page);
+```
+Query其实就是 Url 中 ‘?’ 后面的 key-value。
+这时候你肯定想，如果我有很多个 Query，这么一个个写岂不是很累？而且根据不同的情况，有些字段可能不传，这与方法的参数要求显然也不相符。于是，打群架版本的QueryMap横空出世了，使用方法很简单，我就不多说了。
+
+##### 2.2.2 Field & FieldMap
+其实我们用POST的场景相对较多，绝大多数的服务端接口都需要做加密、鉴权和校验，GET显然不能很好的满足这个需求。使用POST提交表单的场景就更是刚需了，怎么提呢？
+```
+@FormUrlEncoded
+@POST("/") 
+Call<ResponseBody> example( @Field("name") String name, @Field("occupation") String occupation);
+```
+其实也很简单，我们只需要定义上面的接口就可以了，我们用 Field声明了表单的项，这样提交表单就跟普通的函数调用一样简单直接了。
+等等，你说你的表单项不确定个数？还是说有很多项你懒得写？Field同样有个打群架的版本——FieldMap，赶紧试试吧~~
+
+
+##### 2.2.3  Part & PartMap
+这个是用来上传文件的。话说当年用 HttpClient上传个文件老费劲了，一会儿编码不对，一会儿参数错误（也怪那时段位太低吧TT）。。。可是现在不同了，自从有了Retrofit，妈妈再也不用担心文件上传费劲了~~~
+```
+public interface FileUploadService {
+  @Multipart 
+  @POST("upload") 
+  Call<ResponseBody> upload(@Part("description") RequestBody description, @Part MultipartBody.Part file); 
+}
+```
+如果你需要上传文件，和我们前面的做法类似，定义一个接口方法，需要注意的是，这个方法不再有 @FormUrlEncoded这个注解，而换成了@Multipart，后面只需要在参数中增加Part就可以了。也许你会问，这里的Part和Field究竟有什么区别，其实从功能上讲，无非就是客户端向服务端发起请求携带参数的方式不同，并且前者可以携带的参数类型更加丰富，包括数据流。也正是因为这一点，我们可以通过这种方式来上传文件，下面我们就给出这个接口的使用方法：
+
+
 
 
 
