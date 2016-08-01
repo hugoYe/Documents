@@ -22,10 +22,12 @@
 
 <h2 id="1"> 使用 </h2>
 
-1、Android studio开发项目引用依赖需要在 build.gradle 脚本中添加：
+### 1、引用依赖
+Android studio开发项目引用Retrofit需要在 build.gradle 脚本中添加依赖：
 > compile 'com.squareup.retrofit2:retrofit:2.1.0'
 
-2、Retrofit各接口概念一览
+### 2、Retrofit各接口概念一览
+
 Retrofit要求将你的HTTP访问API接口都定义成Java接口，例如，定义一个GET请求接口，定义如下：
 ```
 public interface GitHubService {
@@ -33,6 +35,43 @@ public interface GitHubService {
   Call<List<Repo>> listRepos(@Path("user") String user);
 }
 ```
+当调用listRepos接口发起请求时，{user}会被替换为方法的第一个参数user。
+
+请求接口定义好了，接下来需要进行Retrofit初始化了：
+```
+Retrofit retrofit = new Retrofit.Builder()
+    .baseUrl("https://api.github.com/")
+    .build();
+
+GitHubService service = retrofit.create(GitHubService.class);
+```
+
+然后就可以通过创建好的实例化对象进行请求操作咯：
+```
+Call<List<Repo>> repos = service.listRepos("octocat");
+```
+
+发请求的代码就像前面这一句，返回的 repos其实并不是真正的数据结果，它更像一条指令，你可以在合适的时机去执行它：
+```
+// 同步调用
+List<Repo> data = repos.execute();
+
+// 异步调用
+repos.enqueue(new Callback<List<Repo>>(){
+          @Override
+          public void onResponse(Call<List<Repo>> call, Response<List<Repo>> response) {
+              List<Repo> data = response.body();
+          }
+          
+          @Override
+          public void onFailure(Call<List<Repo>> call, Throwable t) {
+              t.printStackTrace();
+          }
+    });
+```
+啥感觉？有没有突然觉得请求接口就好像访问自家的方法一样简单？呐，前面我们看到的，就是 Retrofit官方的 demo 了。你以为这就够了？噗~怎么可能。
+
+
 
 <h2 id="2"> 源码解析 </h2>
 
