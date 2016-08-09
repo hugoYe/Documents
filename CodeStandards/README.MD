@@ -26,6 +26,10 @@
 
 (1)编码方式统一用UTF-8。 Android Studio默认已是UTF-8，只要不去改动它就可以了。
 
+![编码方式](pictures/pic1.png)
+
+
+
 
 <h3 id="2"> 2. 命名规范 </h3>
 
