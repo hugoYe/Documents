@@ -123,7 +123,104 @@ public void sortUserList(List<User> userList) {
 
 <h4 id="2.3"> 2.3 方法 </h4> 
 
+方法名采用**驼峰命名法**，首字母小写，不得使用字母以外的字符，方法描述的是一个操作行为，因此，必须以动词开头。方法名称应当是一个“动词+名词”的动宾结构的词组或者就是一个动词。例如命名一个下载图片的方法:
+```
+// Good
+public void downloadImage(String url) {
+    // do something.
+}
+ 
+// Bad
+// 首字母大写
+public void DownloadImage(String url) {
+    // do something.
+}
+// or
+// 带有下划线
+public void download_image(String url) {
+    // do something.
+}
+// or
+// 非动宾结构词组
+public void imageLoading(String url) {
+    // do something.
+}
+```
+
+如果是一个判断方法，名称以is、can、has等词开头。例如命名一个判断图片下载器是否正在下载的方法:
+```
+// Good
+public boolean isLoading() {
+    return mState == STATE_DOWNLOADING;
+}
+ 
+// Bad
+public boolean loading() {
+    return mState == STATE_DOWNLOADING;
+}
+```
+
+
 <h4 id="2.4"> 2.4 类 </h4> 
+
+类名采用**大驼峰命名法**，首字母大写，并且类名必须是一个名词或者名词词组。例如命名一个图片加载器类:
+```
+// Good
+public class ImageLoader {
+     
+    private int mState = 0;
+    ......
+}
+ 
+// Bad
+// 非名词词组
+public class LoadImage {
+    ......
+}
+// or
+// 首字母小写
+public class imageLoad {
+    ......
+}
+```
+
+如果是抽象类，名称建议以Abs作为前缀。列如命名一个加载器抽象类:
+```
+// 加载器抽象类
+public abstract class AbsLoader {
+    ......
+}
+ 
+// 图片加载器类
+public class ImageLoader extends AbsLoader {
+    ......
+}
+// 文件加载器类
+public class FileLoader extends AbsLoader {
+    ......
+}
+```
+
+如果一个类继承自另外一个类，那么这个类名必须以父类的名称作为后缀，例如:
+```
+public class MainActivity extends Activity {
+    ......
+}
+```
+
+如果父类带有一些特定前缀的，例如Base、Abs等，子类名称应该将这些前缀去掉，例如:
+```
+// 通常我们的项目中会存在一个自定义的Activity的基类
+// 定义了一些公共属性和方法
+public class BaseActivity extends Activity {
+    ......
+}
+ 
+// 子类可以将父类的Base去掉
+public class MainActivity extends BaseActivity {
+    ......
+}
+```
 
 <h4 id="2.5"> 2.5 接口 </h4> 
 
