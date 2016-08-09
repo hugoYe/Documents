@@ -87,6 +87,40 @@ private String _cityName;
 private String arg1;
 ```
 
+私有和被保护成员变量以小写字母m为前缀，静态私有成员变量以小写字母s为前缀，公开成员变量和静态变量都不用以前缀开头。例如:
+
+```
+// Good
+private String mUsername = "hugo";
+protected int mRole;
+private static Object sInstance;
+ 
+public int age;
+public static Object instance;
+ 
+// Bad
+private String user_name = "hugo";
+protected int role;
+private int _role;
+private static Object instance;
+ 
+public int mAge;
+public static Object sInstance;
+```
+
+方法内的变量都不需要加任何前缀。例如:
+
+```
+public void sortUserList(List<User> userList) {
+    // Good
+    User temp = null;
+ 
+    // Bad
+    User _temp = null;
+    User mTemp = null;
+}
+```
+
 <h4 id="2.3"> 2.3 方法 </h4> 
 
 <h4 id="2.4"> 2.4 类 </h4> 
