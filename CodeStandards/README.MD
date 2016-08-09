@@ -65,6 +65,28 @@ public void sortUserList(List<User> userList) {
 
 <h4 id="2.2"> 2.2 变量 </h4> 
 
+格式采用**驼峰命名法**，变量首字母小写，单词以首字母大写分隔。例如：
+
+```
+// Good
+private String mCityName;
+ 
+// Bad
+private String cityname;
+private String city_name;
+```
+
+不可以以除字母外的任何字符作为开头，不可以使用无意义的描述词汇。例如:
+
+```
+// Good
+private String mCityName;
+ 
+// Bad
+private String _cityName;
+private String arg1;
+```
+
 <h4 id="2.3"> 2.3 方法 </h4> 
 
 <h4 id="2.4"> 2.4 类 </h4> 
