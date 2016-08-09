@@ -224,7 +224,59 @@ public class MainActivity extends BaseActivity {
 
 <h4 id="2.5"> 2.5 接口 </h4> 
 
+接口名称和类名一样，但对于一些修饰性的接口，名称应该以形容词命名。例如Java的可克隆接口:
+```
+public interface Clonable {
+}
+```
 
+再例如Android的序列化接口:
+```
+public interface Parcelable {
+    public int describeContents();
+    public void writeToParcel(Parcel dest, int flags);
+}
+```
+
+在传统的Java工程中，接口都建议以大写字母I作为前缀，例如可能这样命名一个加载器接口:
+```
+public interface ILoader {
+    public void doInBackground();
+}
+```
+
+但在Android工程中，更加强调代码的语义性，所以，对于公开的接口，不需要添加任何前缀，例如加载器接口应该这样命名:
+```
+public interface Loader {
+    public void doInBackground();
+}
+```
+
+在Android项目中，常常会定义一些监听器回调接口，凡是监听器回调接口，必须以“On”开头，以“Listener”结尾，回调方法必须以“on”开头，列如定义一个下载监听器:
+```
+public interface OnDownloadListener {
+ 
+    public void onLoadingStarted(int token, String url);
+    public void onLoading(int token, int progress);
+    public void onLoadingCompleted(int token);
+    
+}
+```
+
+回调接口还可以用Callback作为名词。
+如果是一个handler，那么回调方法可以用handle作为动词，例如Android的Handler类:
+```
+public class Handler {
+    public void handleMessage(Message msg) {}
+}
+```
+
+再例如处理网络响应的接口:
+```
+public interface ResponseHandler<T> {
+    public void handleResponse(HttpResponse response)
+}
+```
 
 
 <h3 id="3"> 3. 注释规范 </h3>
