@@ -28,8 +28,9 @@
 
 ![编码方式](pictures/pic1.png)
 
-
-
+(2)代码采用统一格式，可以自己集成一种格式，也可以直接使用Android Studio默认的格式，并且使用快捷键进行代码自动格式化。       
+Windows：CTRL+ALT+L            
+Mac：OPTION+COMMAND+L                 
 
 <h3 id="2"> 2. 命名规范 </h3>
 
