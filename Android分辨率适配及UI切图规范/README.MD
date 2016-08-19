@@ -73,4 +73,10 @@ sp
 Android开发时用此单位设置文字大小，可根据字体大小首选项进行缩放。
 推荐使用12sp、14sp、18sp、22sp作为字体设置的大小，不推荐使用奇数和小数，容易造成精度的丢失问题；小于12sp的字体会太小导致用户看不清。
 
-![pic5](pictures/pic5.png)
+|    默认的界面风格      |     480*800，PPI = 240     |     720*1280，PPI = 320      |
+|       -----------      |     ------------------     |      ---------------         |
+|    Text Size Micro     |     18px = 12sp            |      24px = 12sp             |
+|    Text Size Small     |     21px = 14sp            |     28px = 14sp              |
+|                        |                            |     32px = 16sp              |
+|    Text Size Medium    |     27px = 18sp            |     36px = 18sp              |
+|    Text Size Large     |     33px = 22sp            |     44px = 22sp              |
