@@ -135,10 +135,10 @@ brew install watchman
 
 <h2 id="666.3"></h2>
 ### 图书
-《React Native入门与实战》
-《React Native开发指南》
-《React Native跨平台移动应用开发》✨推荐✨
-《React Native：用JavaScript开发移动应用》
+《React Native入门与实战》     
+《React Native开发指南》     
+《React Native跨平台移动应用开发》✨推荐✨     
+《React Native：用JavaScript开发移动应用》     
 
 <h2 id="666.4"></h2>
 ### 优秀开源组件（库）
