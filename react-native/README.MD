@@ -12,7 +12,7 @@
 <h1 id="1"></h1>
 1、背景介绍
 ================
-React Native(下文简称'RN')是facebook开源的前端框架，一套代码(80%以上复用代码)能运行于双平台上，真正拥有了 Hybrid 框架的所有优势，且拥有更接近于native的显示效果。
+[React Native](https://facebook.github.io/react-native/)(下文简称'RN')是facebook开源的前端框架，一套代码(80%以上复用代码)能运行于双平台上，真正拥有了 Hybrid 框架的所有优势，且拥有更接近于native的显示效果。
 
 RN 的目标不是 “Write once, run anywhere"，因为不同平台的差异是客观存在的，设计风格也各有不同。它要做的，是 “Learn once, write anywhere”。React 里的 view 不仅可以是 DOM，也可以是 iOS 控件或者 Android 控件，不论是什么平台，都能 “Build In React”。
 
@@ -22,8 +22,8 @@ RN 的目标不是 “Write once, run anywhere"，因为不同平台的差异是
 2、搭建RN开发环境
 ==================
 <h2 id="2.1"></h2>
-## 2.1 Mac环境
+### 2.1 Mac环境
 
 
 <h2 id="2.2"></h2>
-## 2.2 Windows环境
+### 2.2 Windows环境
