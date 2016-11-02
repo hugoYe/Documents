@@ -7,6 +7,13 @@
   * [2.2 Windows环境](#2.2)
   
 + [附录、相关学习资源](#666)
+  * [教程](#666.1)
+  * [开源APP](#666.2)
+  * [图书](#666.3)
+  * [优秀开源组件（库）](#666.4)
+  * [工具](#666.5)
+  * [资源网站及社区](#666.6)
+  * [业内讨论与对比](#666.7)
 
 
 
@@ -81,3 +88,94 @@ brew install watchman
 <h1 id="666"></h1>
 附录、相关学习资源
 --------------------
+<h2 id="666.1"></h2>
+### 教程
+#### React Native
+构建Facebook F8 2016 App / React Native 开发指南
+React Native入门指南
+30天学习React Native教程
+React Native 官方api文档
+React Native中文文档(极客学院)
+React Native中文文档(react native中文网，人工翻译，官网完全同步)
+
+#### React.js
+react.js中文文档
+react.js入门教程(gitbook)
+react.js快速入门教程 - 阮一峰
+
+#### ECMAScript
+深入浅出ES6（一）：ES6是什么
+深入浅出ES6（二）：迭代器和for-of循环
+深入浅出ES6（三）：生成器 Generators
+深入浅出ES6（四）：模板字符串
+深入浅出ES6（五）：不定参数和默认参数
+ECMAScript 6入门 - 阮一峰
+
+#### 系列教程
+深入浅出React（一）：React的设计哲学 - 简单之美
+深入浅出React（二）：React开发神器Webpack
+深入浅出React（三）：理解JSX和组件
+深入浅出React（四）：虚拟DOM Diff算法解析
+深入浅出React（五）：使用Flux搭建React应用程序架构
+React Native探索（一）：背景、规划和风险
+React Native探索（二）：布局篇
+React Native探索（三）：与 react-web 的融合
+
+<h2 id="666.2"></h2>
+### 开源APP
+官方演示App
+Facebook F8 App
+奇舞周刊 iOS 版（上架应用）
+HackerNews-React Native
+知乎专栏app
+开源中国的Git@OSC客户端
+数独 - 重拾纯粹数独的乐趣
+React Native-gitfeed - GitHub客户端
+
+
+<h2 id="666.3"></h2>
+### 图书
+《React Native入门与实战》
+《React Native开发指南》
+《React Native跨平台移动应用开发》✨推荐✨
+《React Native：用JavaScript开发移动应用》
+
+<h2 id="666.4"></h2>
+### 优秀开源组件（库）
+React Native组件库（比较全的组件库）
+最佳轮播类组件
+下拉刷新组件
+模态框
+HTML显示组件
+Material React Native (MRN) - Material Design组件库
+React Native-Elements - React Native样式组件库
+Shoutem UI - React Native样式组件库
+React Native组件库（又是一个组件库）
+
+<h2 id="666.5"></h2>
+### 工具
+React Native-snippets(代码提示)
+React Native-babel(使用ES6+)
+sqlite for React Native
+Pepperoni - React Native项目初始化套件
+ignite - React Native CLI项目生成器
+Deco IDE - React Native IDE
+
+<h2 id="666.6"></h2>
+### 资源网站及社区
+React Native官网
+React-China社区
+React Native中文社区
+Use React Native 资讯站(使用技巧及新闻)
+稀土掘金
+
+<h2 id="666.7"></h2>
+### 业内讨论与对比
+跨平台开发时代的 (再次) 到来？（ Xamarin，NativeScript 和 React Native 对比）
+谈谈 React Native - 唐巧
+如何评价React-Native?
+React Native概述：背景、规划和风险
+Native与Web的融合 - Qcon中React-Native演讲
+Weex & ReactNative & JSPatch大对比
+Weex&ReactNative对比
+React Native一周年回顾--Martin Konicek
