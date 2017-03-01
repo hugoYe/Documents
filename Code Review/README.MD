@@ -85,6 +85,6 @@
 
 7. 参考附录
 -------------------------
-1、从CODE REVIEW 谈如何做技术（现阿里“聚石塔”团队，陈皓）     
-2、大家的公司的code review都是怎么做的？遇到过什么问题么？（鹅厂团队的Code Review经验分享）      
-3、11 个高效的同行代码评审最佳实践       
+1、[从CODE REVIEW 谈如何做技术](http://coolshell.cn/articles/11432.html/comment-page-1#comments)（现阿里“聚石塔”团队，陈皓）     
+2、[大家的公司的code review都是怎么做的？遇到过什么问题么？](https://www.zhihu.com/topic/19668200/hot)（鹅厂团队的Code Review经验分享）   
+3、[11 个高效的同行代码评审最佳实践](https://www.ibm.com/developerworks/cn/rational/11-proven-practices-for-peer-review/)       
