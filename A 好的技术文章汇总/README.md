@@ -1,4 +1,8 @@
 每日看到的好技术文章汇总
+---------------------
+**2017-3-7**  
+[糯米移动组件架构演进之路](http://www.cnblogs.com/mosthink/articles/5501674.html)
+> 本文介绍了百度糯米移动App，在面临多业务和多渠道时架构的演进，以及对接入层和Hybrid框架的优化。
 -------------------
 **2017-2-22**       
 [Android架构思考(模块化、多进程)](http://blog.spinytech.com/2016/12/28/android_modularization/)
