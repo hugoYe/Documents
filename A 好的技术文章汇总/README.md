@@ -18,16 +18,3 @@ https://github.com/typ0520/fastdex
 [也许，这样理解HTTPS更容易](http://www.jianshu.com/p/705dcd60c264)
 > 本文尝试一步步还原HTTPS的设计过程，以理解为什么HTTPS最终会是这副模样。但是这并不代表HTTPS的真实设计过程。在阅读本文时，你可以尝试放下已有的对HTTPS的理解，这样更利于“还原”过程。
 
-----------------------
-
-**2017-3-7**  
-[安居客Android项目架构演进](http://blog.csdn.net/baron_leizhang/article/details/58071773)
-
-[糯米移动组件架构演进之路](http://www.cnblogs.com/mosthink/articles/5501674.html)
-> 本文介绍了百度糯米移动App，在面临多业务和多渠道时架构的演进，以及对接入层和Hybrid框架的优化。
-
--------------------
-
-**2017-2-22**       
-[Android架构思考(模块化、多进程)](http://blog.spinytech.com/2016/12/28/android_modularization/)
-> 关于模块化(组件化)这个问题，我想每个开发者可能都认真的思考过。随着项目的开发，业务不断壮大，业务模块越来越多，各个模块间相互引用，耦合越来越严重，同时有些项目（比如我们公司）还伴随着子应用单独包装推广，影子应用单独发布等等需求，重新调整架构迫在眉睫。
